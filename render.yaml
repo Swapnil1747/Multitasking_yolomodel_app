@@ -2,8 +2,9 @@ services:
   - type: web
     name: yolov11-multitask-app
     env: python
-    buildCommand: pip install -r requirements.txt
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10
+    buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
     startCommand: streamlit run app.py --server.port $PORT --server.enableCORS false
     autoDeploy: true
-    staticPublishPath: public
-    staticPublishPathType: directory
